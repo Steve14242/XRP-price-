@@ -1,0 +1,20 @@
+function fetchXRPData() {
+  const xrpAPI = 'https://api.coingecko.com/api/v3/simple/price?ids=xrp&vs_currencies=usd';
+  return fetch(xrpAPI)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => data.xrp.usd)
+    .catch(error => console.error('Error fetching XRP data:', error));
+}
+In this example, we use the CoinGecko API to fetch the current XRP price in USD. The fetch() function returns a promise that resolves with the response object. We check if the response was successful with response.ok, and if it is, we convert the response body to JSON with response.json().
+
+Once we have the JSON data, we extract the XRP price in USD with data.xrp.usd and return it. If there is an error during the fetch, we catch it and log an error message.
+
+To use this function, you can call it and handle the promise as follows:
+fetchXRPData()
+  .then(xrpPrice => console.log(`XRP price in USD: ${xrpPrice}`))
+  .catch(error => console.error('Error:', error));
